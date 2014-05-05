@@ -46,7 +46,7 @@ module Berkshelf::API
           [].tap do |cookbook_versions|
             connection.organization_repositories(organization).each do |repo|
               connection.tags(repo.full_name).each do |tag|
-                if match = /^v(?<version>.*)$/.match(tag.name)
+                if match = /^v?(?<version>.*)$/.match(tag.name)
                   begin
                     next unless cookbook_metadata = load_metadata(repo.name, tag.name)
 
